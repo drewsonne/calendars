@@ -1,5 +1,7 @@
 enable_testing()
 
+project(calendar_tests)
+
 include(FetchContent)
 FetchContent_Declare(
         googletest
@@ -9,15 +11,20 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+# 'lib' is the folder with Google Test sources
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
+# 'test_calendar' is the target name
+# 'test_calendar.cpp' is the source file with tests
 add_executable(
         test_calendar
         test_calendar.cpp
 )
+
 target_link_libraries(
         test_calendar
-        GTest::gtest_main
-        calendars
+        gtest
+        gtest_main
 )
 
 include(GoogleTest)
