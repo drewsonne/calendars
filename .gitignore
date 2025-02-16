@@ -216,3 +216,5 @@ $RECYCLE.BIN/
 
 
 build/
+*_include.cmake
+*_tests.cmake
