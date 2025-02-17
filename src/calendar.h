@@ -10,15 +10,21 @@ namespace calendar {
 
         virtual ~Calendar() = default;
 
-        [[nodiscard]] RataDie rata_die() const;
+        [[nodiscard]] RataDie rataDie() const;
 
         [[nodiscard]] RataDie epoch() const;
 
-        virtual Calendar &add_days(int days);
+        virtual Calendar *addDays(int days) = 0;
+
+        virtual Calendar *fromFixed(RataDie rata_die) = 0;
+
+        virtual RataDie toFixed() = 0;
+
+        static int intFloor(int val);
+
+        static int intFloor(double val);
 
     protected:
-        virtual RataDie to_rata_die() = 0;
-
         RataDie _rata_die;
         RataDie _epoch;
     };

@@ -43,9 +43,13 @@ namespace calendar::gregorian {
 
         [[nodiscard]] int day() const;
 
-        [[nodiscard]] DayOfWeek day_of_week() const;
+        [[nodiscard]] DayOfWeek dayOfWeek() const;
 
-        GregorianCalendar &add_days(int days);
+        GregorianCalendar *addDays(int days) override;
+
+        GregorianCalendar *fromFixed(RataDie rata_die) override;
+
+        RataDie toFixed() ;
 
     protected:
         int _year;
