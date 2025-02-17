@@ -3,14 +3,15 @@
 #include <iostream>
 
 namespace calendar {
-    Calendar::Calendar(const RataDie rata_die, const RataDie epoch) : _rata_die(rata_die), _epoch(epoch) {}
-
-    RataDie Calendar::rataDie() const {
-        return _rata_die;
+    Calendar::Calendar(
+        const RataDie rata_die,
+        const RataDie epoch
+    ) : rata_die(rata_die),
+        epoch(epoch) {
     }
 
-    RataDie Calendar::epoch() const {
-        return _epoch;
+    int Calendar::daysUntil(const Calendar *cal) const {
+        return cal->toFixed() - toFixed();
     }
 
     int Calendar::intFloor(const int val) {

@@ -8,25 +8,23 @@ namespace calendar {
     public:
         explicit Calendar(RataDie rata_die, RataDie epoch);
 
+        const RataDie rata_die;
+        const RataDie epoch;
+
+        int daysUntil(const Calendar *cal) const;
+
         virtual ~Calendar() = default;
-
-        [[nodiscard]] RataDie rataDie() const;
-
-        [[nodiscard]] RataDie epoch() const;
 
         virtual Calendar *addDays(int days) = 0;
 
         virtual Calendar *fromFixed(RataDie rata_die) = 0;
 
-        virtual RataDie toFixed() = 0;
+        [[nodiscard]]
+        virtual RataDie toFixed() const = 0;
 
         static int intFloor(int val);
 
         static int intFloor(double val);
-
-    protected:
-        RataDie _rata_die;
-        RataDie _epoch;
     };
 }; // namespace calendars
 

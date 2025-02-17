@@ -37,27 +37,32 @@ namespace calendar::gregorian {
     public:
         GregorianCalendar(int year, int month, int day);
 
-        [[nodiscard]] int year() const;
+        GregorianCalendar(int year, Month month, int day);
 
-        [[nodiscard]] Month month() const;
+        const int year;
+        const Month month;
+        const int day;
 
-        [[nodiscard]] int day() const;
-
-        [[nodiscard]] DayOfWeek dayOfWeek() const;
+        [[nodiscard]]
+        DayOfWeek dayOfWeek() const;
 
         GregorianCalendar *addDays(int days) override;
 
         GregorianCalendar *fromFixed(RataDie rata_die) override;
 
-        RataDie toFixed() ;
+        static RataDie fixedNewYear(int year);
+
+        static RataDie fixedYearEnd(int year);
+
+        [[nodiscard]]
+        RataDie toFixed() const override;
+
+        static int yearFromFixed(RataDie rata_die);
+
+        static bool isLeapYear(int year);
 
     protected:
-        int _year;
-        Month _month;
-        int _day;
-
-    private:
-        static RataDie _fixedFromGregorian(int year, int month, int day);
+        static RataDie fixedFrom(int year, int month, int day);
     };
 }
 
