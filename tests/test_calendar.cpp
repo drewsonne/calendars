@@ -7,9 +7,8 @@
 #include <string_view>
 #include <vector>
 #include <gtest/gtest.h>
-#include <gtest/gtest-death-test.h>
 
-TEST(Simple, Boolean)
+TEST(Calendar, Boolean)
 {
   ASSERT_TRUE(true);
 }

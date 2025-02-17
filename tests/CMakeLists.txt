@@ -5,7 +5,8 @@ project(calendar_tests)
 include(FetchContent)
 FetchContent_Declare(
         googletest
-        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG v1.16.0
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -14,18 +15,15 @@ FetchContent_MakeAvailable(googletest)
 # 'lib' is the folder with Google Test sources
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-# 'test_calendar' is the target name
-# 'test_calendar.cpp' is the source file with tests
-add_executable(
-        test_calendar
-        test_calendar.cpp
+# List of test source files
+set(TEST_SOURCES
+    test_calendar.cpp
+    test_gregorian.cpp
 )
 
-target_link_libraries(
-        test_calendar
-        gtest
-        gtest_main
-)
-
-include(GoogleTest)
-gtest_discover_tests(test_calendar)
+foreach (test_source ${TEST_SOURCES})
+    get_filename_component(test_name ${test_source} NAME_WE)
+    add_executable(${test_name} ${test_source})
+    target_link_libraries(${test_name} gtest_main calendars)
+    add_test(NAME ${test_name} COMMAND ${test_name})
+endforeach ()
